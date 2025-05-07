@@ -4,35 +4,48 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { StyledDialogContent } from './styledComponents.js';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addCourse, editCourse } from '../../store/reducers/courses.js';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { StyledDialogContent } from './styledComponents.js';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addCourse } from '../../store/reducers/courses.js';
 
-export const AddCourse = ({ open, handleClose }) => {
-  const [formValues, setFormValues] = useState({
-    name: '',
-    description: '',
-    startDate: new Date(),
-  });
+const initialState = {
+  name: null,
+  description: null,
+  amountOfLessons: null,
+  startDate: null,
+};
 
-  const [nameValidation, setNameValidation] = useState({ name: '' });
+export const AddCourse = ({ open, handleClose, edit }) => {
+  const [formValues, setFormValues] = useState(initialState);
+
+  const [validation, setValidation] = useState({ name: '', amountOfLesson: '' });
   const dispatch = useDispatch();
 
   const validate = () => {
-    if (formValues.name.length > 40) {
-      setNameValidation({ name: 'The name is too long' });
-      return
+    if (parseInt(formValues.amountOfLessons) < 1) {
+      setValidation({ amountOfLessons: 'It must be a positive number' });
+      return;
     }
-    saveCourse()
-    console.log(formValues);
   };
 
   const saveCourse = () => {
-    dispatch(addCourse({...formValues}));
-  }
+    validate();
+    if (edit) {
+      dispatch(editCourse({ ...formValues, id: edit.id }));
+    } else {
+      dispatch(addCourse({ ...formValues, id: Math.random().toString(36).substring(2) }));
+    }
+    handleClose();
+  };
+
+  useEffect(() => {
+    if (!edit) setFormValues(initialState);
+
+    setFormValues({ ...edit });
+  }, [edit, open]);
 
   return (
     <>
@@ -45,9 +58,11 @@ export const AddCourse = ({ open, handleClose }) => {
             name="name"
             label="Name"
             variant="outlined"
+            value={formValues.name}
             onChange={(e) => setFormValues({ ...formValues, name: e.target.value })}
-            error={nameValidation.name}
-            helperText={nameValidation.name}
+            error={validation.name}
+            helperText={validation.name}
+            aria-valuemax={20}
           />
 
           <TextField
@@ -55,7 +70,20 @@ export const AddCourse = ({ open, handleClose }) => {
             label="Description"
             multiline
             rows={3}
+            value={formValues.description}
             onChange={(e) => setFormValues({ ...formValues, description: e.target.value })}
+          />
+
+          <TextField
+            required
+            name="amountOfLessons"
+            label="Amount of lessons"
+            variant="outlined"
+            type="number"
+            value={formValues.amountOfLessons}
+            onChange={(e) => setFormValues({ ...formValues, amountOfLessons: e.target.value })}
+            error={validation.amountOfLessons}
+            helperText={validation.amountOfLessons}
           />
 
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -66,21 +94,16 @@ export const AddCourse = ({ open, handleClose }) => {
                   helperText: 'MM/DD/YYYY',
                 },
               }}
-              format="DD/MM/YYYY"
-              onChange={(date) => setFormValues({ ...formValues, startDate: new Date(date) })}
+              value={formValues.startDate}
+              onChange={(value) => {
+                setFormValues({ ...formValues, startDate: value.format() });
+              }}
             />
           </LocalizationProvider>
         </StyledDialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button
-            onClick={() => {
-              validate();
-              console.log('test');
-            }}
-          >
-            Submit
-          </Button>
+          <Button onClick={saveCourse}>Submit</Button>
         </DialogActions>
       </Dialog>
     </>
