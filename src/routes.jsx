@@ -1,5 +1,7 @@
 import { createBrowserRouter, Navigate, Outlet } from 'react-router';
 import { MainLayout } from './layouts/MainLayout/index.js';
+import { Courses } from './components/Courses/Courses.jsx';
+import { Students } from './components/Students/Students.jsx';
 
 export const router = createBrowserRouter([
   {
@@ -8,15 +10,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: 'courses',
-        element: (
-          <p>courses</p>
-        ),
+        element: <Courses />,
       },
       {
         path: 'students',
-        element: (
-          <p>students</p>
-        ),
+        element: <Students />,
       },
     ],
   },

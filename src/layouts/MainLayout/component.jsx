@@ -1,37 +1,32 @@
 import { Outlet } from 'react-router';
+import mainLogo from '../../assets/CourseLogo.png';
+import { DashboardLayout } from '@toolpad/core/DashboardLayout';
+import { NAVIGATION } from './constants.jsx';
+import { ReactRouterAppProvider } from '@toolpad/core/react-router';
+import { StyledPageContainer } from './styledComponents.js';
 import { LoginForm } from '../../components/LoginForm/LoginForm.jsx';
 import { useSelector } from 'react-redux';
-import mainLogo from '../../assets/CourseLogo.png';
-import { demoTheme } from '../../tools/theme.js';
-import { DashboardLayout } from '@toolpad/core/DashboardLayout';
-import { PageContent } from '../../components/PageContent/PageContent.jsx';
-import { AppProvider } from '@toolpad/core/AppProvider';
-import { useDemoRouter } from '@toolpad/core/internal';
-import { NAVIGATION } from './constants.jsx';
 
 export const MainLayout = () => {
   const user = useSelector((state) => state.currentUser);
-  const router = useDemoRouter('/home_work45');
-
   return (
     <>
-      <AppProvider
+      {!user.isAuth && <LoginForm />}
+
+      <ReactRouterAppProvider
         navigation={NAVIGATION}
         branding={{
           logo: <img src={mainLogo} alt="logo" />,
           title: 'MUI',
-          homeUrl: '/home_work45',
+          homeUrl: '/',
         }}
-        router={router}
-        theme={demoTheme}
       >
         <DashboardLayout>
-          <PageContent pathname={router.pathname} />
+          <StyledPageContainer title="">
+            <Outlet />
+          </StyledPageContainer>
         </DashboardLayout>
-      </AppProvider>
-
-      {!user.isAuth && <LoginForm />}
-      <Outlet />
+      </ReactRouterAppProvider>
     </>
   );
 };

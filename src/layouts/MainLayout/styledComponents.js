@@ -1,8 +1,9 @@
 import { styled } from 'styled-components';
-import { Button } from '@mui/material';
+import { PageContainer } from '@toolpad/core';
 
-export const StyledButton = styled(Button)`
-  &.MuiButtonBase-root {
-    margin: 0 15px;
-  }
+export const StyledPageContainer = styled(PageContainer)`
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    max-width: none;
 `;
