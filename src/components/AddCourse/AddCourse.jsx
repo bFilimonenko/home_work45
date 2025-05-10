@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addCourse, editCourse } from '../../store/reducers/courses.js';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 const initialState = {
   name: null,
@@ -27,7 +27,6 @@ export const AddCourse = ({ open, handleClose, edit }) => {
   const validate = () => {
     if (parseInt(formValues.amountOfLessons) < 1) {
       setValidation({ amountOfLessons: 'It must be a positive number' });
-      return;
     }
   };
 
@@ -86,7 +85,7 @@ export const AddCourse = ({ open, handleClose, edit }) => {
             helperText={validation.amountOfLessons}
           />
 
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
               label="Start date"
               slotProps={{
@@ -96,7 +95,7 @@ export const AddCourse = ({ open, handleClose, edit }) => {
               }}
               value={formValues.startDate}
               onChange={(value) => {
-                setFormValues({ ...formValues, startDate: value.format() });
+                setFormValues({ ...formValues, startDate: value });
               }}
             />
           </LocalizationProvider>

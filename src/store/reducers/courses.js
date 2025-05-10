@@ -11,13 +11,6 @@ const coursesSlice = createSlice({
     addCourse: coursesAdapter.addOne,
     deleteCourse: coursesAdapter.removeOne,
     editCourse: coursesAdapter.upsertOne,
-
-    // addCourse: (state, { payload }) => {
-    //   state.name = payload.name;
-    //   state.description = payload.description;
-    //   state.amountOfLessons = payload.amountOfLessons;
-    //   state.startDate = payload.startDate;
-    // },
   },
 });
 
