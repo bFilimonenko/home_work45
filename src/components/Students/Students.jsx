@@ -26,8 +26,20 @@ export const Students = () => {
       <StudentsForm open={studentsFormOpen} handleClose={() => setStudentsFormOpen(false)} />
 
       {/*There is nothing here yet*/}
+      {!items.length && <Typography variant="subtitle1" color='textDisabled' gutterBottom>There is nothing here yet</Typography>}
+
 
       <StudentsList items={items} />
     </>
   );
 };
+// 'primary'
+// | 'secondary'
+// | 'success'
+// | 'error'
+// | 'info'
+// | 'warning'
+// | 'textPrimary'
+// | 'textSecondary'
+// | 'textDisabled'
+// | string

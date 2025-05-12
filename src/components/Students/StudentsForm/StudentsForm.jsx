@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { StyledDialogContent } from './styledComponents.js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -14,7 +14,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { InputLabel, MenuItem, Select } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { addStudent } from '../../../store/reducers/students.js';
+import { addStudent, editStudent } from '../../../store/reducers/students.js';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 const initialState = {
@@ -70,14 +70,24 @@ const cities = [
   'Zhytomyr',
 ];
 
-export const StudentsForm = ({ open, handleClose }) => {
+export const StudentsForm = ({ open, handleClose, edit }) => {
   const [formValues, setFormValues] = useState(initialState);
   const dispatch = useDispatch();
 
   const saveStudent = () => {
-    dispatch(addStudent({ ...formValues, id: Math.random().toString(36).substring(2) }));
-    console.log('save');
+    if (edit) {
+      dispatch(editStudent({ ...formValues, id: edit.id }));
+    } else {
+      dispatch(addStudent({ ...formValues, id: Math.random().toString(36).substring(2) }));
+    }
+    handleClose();
   };
+
+  useEffect(() => {
+    if (!edit) setFormValues(initialState);
+
+    setFormValues({ ...edit });
+  }, [edit, open]);
 
   return (
     <>

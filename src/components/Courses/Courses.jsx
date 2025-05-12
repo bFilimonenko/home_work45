@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
 import { useState } from 'react';
-import { AddCourse } from '../AddCourse/AddCourse.jsx';
+import { CourseForm } from './CourseForm/CourseForm.jsx';
 import { useSelector } from 'react-redux';
 import { selectAllCourses } from '../../store/selectors/courses.js';
 import { CoursesList } from './CoursesList/CoursesList.jsx';
@@ -23,11 +23,9 @@ export const Courses = () => {
           Add Course
         </Button>
       </StyledBox>
-      <AddCourse open={addCourseFormOpen} handleClose={() => setAddCourseFormOpen(false)} />
+      <CourseForm open={addCourseFormOpen} handleClose={() => setAddCourseFormOpen(false)} />
 
-      {/*There is nothing here yet*/}
-
-      {!items && <Typography variant="subtitle1" gutterBottom>There is nothing here yet</Typography>}
+      {!items.length && <Typography variant="subtitle1" color='textDisabled' gutterBottom>There is nothing here yet</Typography>}
 
       <CoursesList items={items} />
     </>

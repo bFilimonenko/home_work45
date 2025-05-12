@@ -7,7 +7,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { StyledDialogContent } from './styledComponents.js';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addCourse, editCourse } from '../../store/reducers/courses.js';
+import { addCourse, editCourse } from '../../../store/reducers/courses.js';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
@@ -18,7 +18,7 @@ const initialState = {
   startDate: null,
 };
 
-export const AddCourse = ({ open, handleClose, edit }) => {
+export const CourseForm = ({ open, handleClose, edit }) => {
   const [formValues, setFormValues] = useState(initialState);
 
   const [validation, setValidation] = useState({ name: '', amountOfLesson: '' });

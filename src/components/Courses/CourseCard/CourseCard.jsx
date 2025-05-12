@@ -5,28 +5,27 @@ import Typography from '@mui/material/Typography';
 import { useDispatch } from 'react-redux';
 import { deleteCourse, editCourse } from '../../../store/reducers/courses.js';
 import { StyledCard } from './styledComponents.js';
-import { AddCourse } from '../../AddCourse/AddCourse.jsx';
+import { CourseForm } from '../CourseForm/CourseForm.jsx';
 import { useState } from 'react';
 
 export const CourseCard = ({ ...course }) => {
   const dispatch = useDispatch();
-  const [addCourseFormOpen, setAddCourseFormOpen] = useState(false);
+  const [CourseFormOpen, setCourseFormOpen] = useState(false);
 
-
-  // const deleteCourse = (course) => {}
   const handleDeleteCourse = () => {
     dispatch(deleteCourse(course.id));
   };
 
   const handleEditCourse = () => {
     dispatch(editCourse(course));
-    setAddCourseFormOpen(true)
+    setCourseFormOpen(true)
   };
+
   return (
     <>
       <StyledCard>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h5" component="div" color="primary">
             {course.name}
           </Typography>
           <Typography variant="body2" color="textSecondary">
@@ -37,13 +36,13 @@ export const CourseCard = ({ ...course }) => {
           <Button size="small" onClick={handleEditCourse}>
             Edit
           </Button>
-          <Button size="small" onClick={handleDeleteCourse}>
+          <Button size="small" onClick={handleDeleteCourse} color='error'>
             Delete
           </Button>
         </CardActions>
       </StyledCard>
 
-      <AddCourse open={addCourseFormOpen} handleClose={() => setAddCourseFormOpen(false)} edit={course} />
+      <CourseForm open={CourseFormOpen} handleClose={() => setCourseFormOpen(false)} edit={course} />
     </>
   );
 };

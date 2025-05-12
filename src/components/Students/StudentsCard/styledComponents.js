@@ -1,7 +1,8 @@
 import { styled } from 'styled-components';
 import Card from '@mui/material/Card';
-import { Avatar, IconButton } from '@mui/material';
+import { Avatar } from '@mui/material';
 import Box from '@mui/material/Box';
+import CardActions from '@mui/material/CardActions';
 
 export const StyledCard = styled(Card)`
     &.MuiPaper-root {
@@ -12,50 +13,31 @@ export const StyledCard = styled(Card)`
 
         &:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12)
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         }
     }
 `
 
-export const DeleteButton = styled(IconButton)`
-    &.MuiButtonBase-root {
-        position: absolute;
-        top: 8px;
-        right: 8px;
-        color: #d50000;
+export const StyledCardActions = styled(CardActions)`
+    position: absolute;
+    top: 8px;
+    right: 8px;
+`
 
-        &:hover {
-            background-color: rgba(197, 50, 50, 0.1)
-        }
-    }
+export const ProfileHeader = styled(Box)`
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
 `
 
 export const StyledAvatar = styled(Avatar)`
     &.MuiAvatar-root {
         width: 50px;
         height: 50px;
-        background-color: #32C5A2;
+        background-color: #1976D2;
         margin-right: 16px;
-        font-size: 1.5rem;
+        font-weight: bold;
     }
 `
 
-export const InfoDisplay = styled(Box)`
-  
-    margin-bottom: 12px;
-
-     & .MuiTypography-root {
-        &.label {
-            font-weight: 500;
-            color: #455a64;
-            font-size: 0.875rem;
-            margin-bottom: 2px;
-        }
-
-        &.value {
-            font-size: 1rem;
-            color: #1F2937;
-        }
-    }
-`
 

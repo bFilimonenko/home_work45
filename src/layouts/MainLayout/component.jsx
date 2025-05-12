@@ -21,7 +21,7 @@ export const MainLayout = () => {
           homeUrl: '/',
         }}
       >
-        <DashboardLayout>
+        <DashboardLayout sx={{maxWidth: 2000, margin: '0 auto'}}>
           <StyledPageContainer title="">
             <Outlet />
           </StyledPageContainer>
