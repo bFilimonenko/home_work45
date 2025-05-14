@@ -5,7 +5,7 @@ import { Students } from './components/Students/Students.jsx';
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/home_work45',
     element: <MainLayout />,
     children: [
       {
