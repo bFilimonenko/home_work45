@@ -13,6 +13,7 @@ import { useDispatch } from 'react-redux';
 import { StyledBox, StyledForm, StyledImg } from './styledComponents.js';
 import Typography from '@mui/material/Typography';
 import { signIn } from '../../store/reducers/currentUser.js';
+import mainLogo from '/CourseLogo.png'
 
 export const LoginForm = () => {
   const [loginValues, setLoginValues] = useState({
@@ -77,7 +78,7 @@ export const LoginForm = () => {
           Submit
         </Button>
       </StyledForm>
-      <StyledImg component="img" alt="Logo" src="home_work45/src/assets/CourseLogo.png"></StyledImg>
+      <StyledImg component="img" alt="Logo" src={mainLogo}></StyledImg>
     </StyledBox>
   );
 };

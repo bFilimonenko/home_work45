@@ -3,19 +3,14 @@ import PeopleIcon from '@mui/icons-material/People';
 
 export const NAVIGATION = [
   {
-    segment: 'courses',
+    segment: 'home_work45/courses',
     title: 'Courses',
     icon: <ClassIcon />,
   },
   {
-    segment: 'students',
+    segment: 'home_work45/students',
     title: 'Students',
     icon: <PeopleIcon />,
   },
 ];
 
-
-export const PAGES = {
-  COURSES: './courses',
-  STUDENTS: './students',
-};
