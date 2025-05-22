@@ -38,10 +38,10 @@ export const StudentCard = ({ ...student }) => {
 
         <CardContent>
           <ProfileHeader>
-            <StyledAvatar>{student.name[0]}</StyledAvatar>
+            <StyledAvatar>{student.fullname[0]}</StyledAvatar>
             <Box>
               <Typography variant="h5" color="primary">
-                {student.name}
+                {student.fullname}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
                 social networks
@@ -50,7 +50,7 @@ export const StudentCard = ({ ...student }) => {
           </ProfileHeader>
           <Box sx={{ display: 'flex', gap: '16px' }}>
             <InfoDisplay label="Gender" value={student.gender} />
-            <InfoDisplay label="Birth Date" value={student.dateOfBirth.toLocaleDateString()} />
+            <InfoDisplay label="Birth Date" value={new Date(student.dateOfBirth).toLocaleDateString()} />
             <InfoDisplay label="City" value={student.city} />
           </Box>
         </CardContent>

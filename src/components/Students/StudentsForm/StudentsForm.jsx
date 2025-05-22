@@ -18,7 +18,7 @@ import { addStudent, editStudent } from '../../../store/reducers/students.js';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 const initialState = {
-  name: null, // fullname
+  fullname: null, // fullname
   gender: null, // gender
   city: null, // city
   dateOfBirth: null, // dateOfBirth
@@ -97,11 +97,11 @@ export const StudentsForm = ({ open, handleClose, edit }) => {
           <DialogContentText fontWeight="bold">Fill out the form</DialogContentText>
           <TextField
             required
-            name="name"
+            name="fullname"
             label="Name"
             variant="outlined"
-            value={formValues.name}
-            onChange={(e) => setFormValues({ ...formValues, name: e.target.value })}
+            value={formValues.fullname}
+            onChange={(e) => setFormValues({ ...formValues, fullname: e.target.value })}
           />
 
           <FormControl>

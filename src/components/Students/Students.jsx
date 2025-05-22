@@ -2,15 +2,21 @@ import { StyledBox } from './styledComponents.js';
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
 import { StudentsForm } from './StudentsForm/StudentsForm.jsx';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectAllStudents } from '../../store/selectors/students.js';
 import { StudentsList } from './StudentsList/StudentsList.jsx';
+import { fetchGetAllStudents } from '../../store/actions/students.js';
 
 export const Students = () => {
   const [studentsFormOpen, setStudentsFormOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const items = useSelector(selectAllStudents);
+
+  useEffect(() => {
+    dispatch(fetchGetAllStudents());
+  }, []);
 
   return (
     <>
@@ -26,20 +32,13 @@ export const Students = () => {
       <StudentsForm open={studentsFormOpen} handleClose={() => setStudentsFormOpen(false)} />
 
       {/*There is nothing here yet*/}
-      {!items.length && <Typography variant="subtitle1" color='textDisabled' gutterBottom>There is nothing here yet</Typography>}
-
+      {!items.length && (
+        <Typography variant="subtitle1" color="textDisabled" gutterBottom>
+          There is nothing here yet
+        </Typography>
+      )}
 
       <StudentsList items={items} />
     </>
   );
 };
-// 'primary'
-// | 'secondary'
-// | 'success'
-// | 'error'
-// | 'info'
-// | 'warning'
-// | 'textPrimary'
-// | 'textSecondary'
-// | 'textDisabled'
-// | string
