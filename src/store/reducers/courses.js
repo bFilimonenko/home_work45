@@ -1,5 +1,5 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import { fetchGetAllCourses } from '../actions/courses.js';
+import { fetchGetAllCourses, fetchSaveCourse } from '../actions/courses.js';
 
 export const coursesAdapter = createEntityAdapter();
 
@@ -9,16 +9,20 @@ const coursesSlice = createSlice({
   name: 'courses',
   initialState,
   reducers: {
-    addCourse: coursesAdapter.addOne,
     deleteCourse: coursesAdapter.removeOne,
     editCourse: coursesAdapter.upsertOne,
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchGetAllCourses.fulfilled, (state, { payload }) => {
-      coursesAdapter.addMany(state, payload);
-    });
+    builder
+      .addCase(fetchGetAllCourses.fulfilled, (state, { payload }) => {
+        coursesAdapter.addMany(state, payload);
+      })
+      .addCase(fetchSaveCourse.fulfilled, (state, { payload }) => {
+        coursesAdapter.addOne(state, payload);
+      });
+    //remove one
   },
 });
 
-export const { addCourse, deleteCourse, editCourse } = coursesSlice.actions;
+export const { deleteCourse, editCourse } = coursesSlice.actions;
 export default coursesSlice.reducer;

@@ -8,11 +8,6 @@ import { CoursesList } from './CoursesList/CoursesList.jsx';
 import { StyledBox } from './styledComponents.js';
 import { fetchGetAllCourses } from '../../store/actions/courses.js';
 
-//b29a6267-6b50-442e-b9ee-a1e88ee3a452
-//0bce0861-be91-4bf7-b3e4-e4621cfda2ab
-//d657fe5d-9799-4443-b2cc-e3c2e07da671
-
-
 export const Courses = () => {
   const [addCourseFormOpen, setAddCourseFormOpen] = useState(false);
   const dispatch = useDispatch();
@@ -21,6 +16,7 @@ export const Courses = () => {
   useEffect(() => {
     dispatch(fetchGetAllCourses());
   }, []);
+
   return (
     <>
       <StyledBox>

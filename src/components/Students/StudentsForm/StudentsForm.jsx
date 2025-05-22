@@ -14,8 +14,9 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { InputLabel, MenuItem, Select } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { addStudent, editStudent } from '../../../store/reducers/students.js';
+import { editStudent } from '../../../store/reducers/students.js';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { fetchSaveStudent } from '../../../store/actions/students.js';
 
 const initialState = {
   fullname: null, // fullname
@@ -78,7 +79,7 @@ export const StudentsForm = ({ open, handleClose, edit }) => {
     if (edit) {
       dispatch(editStudent({ ...formValues, id: edit.id }));
     } else {
-      dispatch(addStudent({ ...formValues, id: Math.random().toString(36).substring(2) }));
+      dispatch(fetchSaveStudent(formValues))
     }
     handleClose();
   };

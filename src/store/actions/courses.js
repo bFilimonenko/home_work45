@@ -7,4 +7,12 @@ export const fetchGetAllCourses = createAsyncThunk(CoursesRoutes.GetCourse, asyn
   return await response.json();
 });
 
-
+export const fetchSaveCourse = createAsyncThunk(CoursesRoutes.SaveCourse, async (data) => {
+  await fetch(`${serverUrl}/courses/`, {
+    method: 'post',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+});

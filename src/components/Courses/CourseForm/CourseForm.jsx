@@ -7,9 +7,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { StyledDialogContent } from './styledComponents.js';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addCourse, editCourse } from '../../../store/reducers/courses.js';
+import { editCourse } from '../../../store/reducers/courses.js';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { fetchSaveCourse } from '../../../store/actions/courses.js';
 
 const initialState = {
   name: null,
@@ -35,7 +36,7 @@ export const CourseForm = ({ open, handleClose, edit }) => {
     if (edit) {
       dispatch(editCourse({ ...formValues, id: edit.id }));
     } else {
-      dispatch(addCourse({ ...formValues, id: Math.random().toString(36).substring(2) }));
+      dispatch(fetchSaveCourse(formValues));
     }
     handleClose();
   };
