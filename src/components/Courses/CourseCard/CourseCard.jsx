@@ -3,17 +3,18 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useDispatch } from 'react-redux';
-import { deleteCourse, editCourse } from '../../../store/reducers/courses.js';
+import { editCourse } from '../../../store/reducers/courses.js';
 import { StyledCard } from './styledComponents.js';
 import { CourseForm } from '../CourseForm/CourseForm.jsx';
 import { useState } from 'react';
+import { fetchDeleteCourse } from '../../../store/actions/courses.js';
 
 export const CourseCard = ({ ...course }) => {
   const dispatch = useDispatch();
   const [CourseFormOpen, setCourseFormOpen] = useState(false);
 
   const handleDeleteCourse = () => {
-    dispatch(deleteCourse(course.id));
+    dispatch(fetchDeleteCourse(course.id));
   };
 
   const handleEditCourse = () => {

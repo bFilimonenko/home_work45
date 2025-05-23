@@ -7,9 +7,10 @@ import { ProfileHeader, StyledAvatar, StyledCard, StyledCardActions } from './st
 import { IconButton } from '@mui/material';
 import { InfoDisplay } from './InfoDisplay.jsx';
 import { useDispatch } from 'react-redux';
-import { deleteStudent, editStudent } from '../../../store/reducers/students.js';
+import { editStudent } from '../../../store/reducers/students.js';
 import { useState } from 'react';
 import { StudentsForm } from '../StudentsForm/StudentsForm.jsx';
+import { fetchDeleteStudent } from '../../../store/actions/students.js';
 
 export const StudentCard = ({ ...student }) => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ export const StudentCard = ({ ...student }) => {
   };
   const handleDeleteStudent = () => {
     console.log('Delete clicked');
-    dispatch(deleteStudent(student.id));
+    dispatch(fetchDeleteStudent(student.id));
   };
 
   return (

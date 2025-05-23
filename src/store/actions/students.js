@@ -8,11 +8,18 @@ export const fetchGetAllStudents = createAsyncThunk(StudentsRoutes.GetStudent, a
 });
 
 export const fetchSaveStudent = createAsyncThunk(StudentsRoutes.SaveStudent, async (data) => {
-  await fetch(`${serverUrl}/students/`, {
+  const response = await fetch(`${serverUrl}/students/`, {
     method: 'post',
     body: JSON.stringify(data),
     headers: {
       'Content-Type': 'application/json',
     },
   });
+  return await response.json();
 });
+
+export const fetchDeleteStudent = createAsyncThunk(StudentsRoutes.DeleteStudent, async (id) => {
+  await fetch(`${serverUrl}/students/${id}`, {
+    method: 'delete',
+  })
+})
