@@ -3,7 +3,6 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useDispatch } from 'react-redux';
-import { editCourse } from '../../../store/reducers/courses.js';
 import { StyledCard } from './styledComponents.js';
 import { CourseForm } from '../CourseForm/CourseForm.jsx';
 import { useState } from 'react';
@@ -18,7 +17,6 @@ export const CourseCard = ({ ...course }) => {
   };
 
   const handleEditCourse = () => {
-    dispatch(editCourse(course));
     setCourseFormOpen(true)
   };
 

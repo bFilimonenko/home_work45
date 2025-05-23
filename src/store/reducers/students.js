@@ -1,5 +1,10 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import { fetchDeleteStudent, fetchGetAllStudents, fetchSaveStudent } from '../actions/students.js';
+import {
+  fetchDeleteStudent,
+  fetchEditStudent,
+  fetchGetAllStudents,
+  fetchSaveStudent,
+} from '../actions/students.js';
 
 export const studentsAdapter = createEntityAdapter();
 
@@ -8,9 +13,7 @@ const initialState = studentsAdapter.getInitialState();
 const studentsSlice = createSlice({
   name: 'Students',
   initialState,
-  reducers: {
-    editStudent: studentsAdapter.upsertOne,
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchGetAllStudents.fulfilled, (state, { payload }) => {
@@ -21,9 +24,11 @@ const studentsSlice = createSlice({
       })
       .addCase(fetchDeleteStudent.fulfilled, (state, action) => {
         studentsAdapter.removeOne(state, action.meta.arg);
+      })
+      .addCase(fetchEditStudent.fulfilled, (state, { payload }) => {
+        studentsAdapter.upsertOne(state, payload);
       });
   },
 });
 
-export const { editStudent } = studentsSlice.actions;
 export default studentsSlice.reducer;

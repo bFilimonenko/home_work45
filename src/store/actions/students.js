@@ -21,5 +21,16 @@ export const fetchSaveStudent = createAsyncThunk(StudentsRoutes.SaveStudent, asy
 export const fetchDeleteStudent = createAsyncThunk(StudentsRoutes.DeleteStudent, async (id) => {
   await fetch(`${serverUrl}/students/${id}`, {
     method: 'delete',
-  })
-})
+  });
+});
+
+export const fetchEditStudent = createAsyncThunk(StudentsRoutes.EditStudent, async (data) => {
+  const response = await fetch(`${serverUrl}/students/${data.id}`, {
+    method: 'put',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  return await response.json();
+});

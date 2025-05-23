@@ -14,9 +14,9 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { InputLabel, MenuItem, Select } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { editStudent } from '../../../store/reducers/students.js';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { fetchSaveStudent } from '../../../store/actions/students.js';
+import { fetchEditCourse } from '../../../store/actions/courses.js';
 
 const initialState = {
   fullname: null, // fullname
@@ -24,7 +24,6 @@ const initialState = {
   city: null, // city
   dateOfBirth: null, // dateOfBirth
 };
-// socialNetworkLinks
 
 const cities = [
   'Berdiansk',
@@ -77,9 +76,9 @@ export const StudentsForm = ({ open, handleClose, edit }) => {
 
   const saveStudent = () => {
     if (edit) {
-      dispatch(editStudent({ ...formValues, id: edit.id }));
+      dispatch(fetchEditCourse(formValues));
     } else {
-      dispatch(fetchSaveStudent(formValues))
+      dispatch(fetchSaveStudent(formValues));
     }
     handleClose();
   };
