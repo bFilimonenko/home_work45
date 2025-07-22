@@ -1,5 +1,6 @@
 import { styled } from 'styled-components';
 import { Box } from '@mui/material';
+import { Form } from 'formik';
 
 export const StyledBox = styled(Box)`
     position: relative;
@@ -14,7 +15,7 @@ export const StyledBox = styled(Box)`
     min-height: 300px;
 `;
 
-export const StyledForm = styled.form`
+export const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
   gap: 15px;

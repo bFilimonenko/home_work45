@@ -4,6 +4,7 @@ import { serverUrl } from '../constants/server.js';
 
 export const fetchGetAllStudents = createAsyncThunk(StudentsRoutes.GetStudent, async () => {
   const response = await fetch(`${serverUrl}/students`);
+  console.log(await response.json());
   return await response.json();
 });
 
