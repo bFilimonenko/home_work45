@@ -1,7 +1,9 @@
 export const CoursesRoutes = {
   SaveCourse: 'courses/saveCourse',
-  GetCourse: 'courses/getCourse',
+  GetAllCourses: 'courses/getAllCourses',
+  GetCourseById: 'courses/getCourseById',
   DeleteCourse: 'courses/deleteCourse',
   EditCourse: 'courses/editCourse',
+  AssignStudent: 'courses/assignStudent',
 }
 

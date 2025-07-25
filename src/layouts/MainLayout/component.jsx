@@ -9,6 +9,8 @@ import mainLogo from '/CourseLogo.png';
 import { Button } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { signOut } from '../../store/reducers/currentUser.js';
+import { useEffect } from 'react';
+import { fetchGetAllStudents } from '../../store/actions/students.js';
 
 const LogOut = () => {
   const dispatch = useDispatch();
@@ -21,6 +23,12 @@ const LogOut = () => {
 
 export const MainLayout = () => {
   const user = useSelector((state) => state.currentUser);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchGetAllStudents());
+  }, []);
+
   return (
     <>
       {!user.isAuth ? (

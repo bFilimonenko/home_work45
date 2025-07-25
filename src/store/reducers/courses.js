@@ -1,8 +1,9 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import {
+  fetchAssignStudentToCourse,
   fetchDeleteCourse,
   fetchEditCourse,
-  fetchGetAllCourses,
+  fetchGetAllCourses, fetchGetCourseById,
   fetchSaveCourse,
 } from '../actions/courses.js';
 
@@ -19,6 +20,9 @@ const coursesSlice = createSlice({
       .addCase(fetchGetAllCourses.fulfilled, (state, { payload }) => {
         coursesAdapter.addMany(state, payload);
       })
+      .addCase(fetchGetCourseById.fulfilled, (state, { payload }) => {
+        coursesAdapter.upsertOne(state, payload);
+      })
       .addCase(fetchSaveCourse.fulfilled, (state, { payload }) => {
         coursesAdapter.addOne(state, payload);
       })
@@ -27,7 +31,10 @@ const coursesSlice = createSlice({
       })
       .addCase(fetchEditCourse.fulfilled, (state, { payload }) => {
         coursesAdapter.upsertOne(state, payload);
-      });
+      })
+      .addCase(fetchAssignStudentToCourse.fulfilled, (state, { payload }) => {
+        coursesAdapter.upsertOne(state, payload);
+      })
   },
 });
 

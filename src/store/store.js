@@ -8,6 +8,5 @@ export const store = configureStore({
     currentUser: currentUserReducer,
     courses: coursesReducer,
     students: studentsReducer,
-    // course: courseReduce
   },
 });
